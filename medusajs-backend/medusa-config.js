@@ -79,7 +79,35 @@ const plugins = [
       webhook_secret: process.env.STRIPE_WEBHOOK_SECRET,
       automatic_payment_methods: true
     }
-  }
+  },
+  {
+    resolve: `medusa-plugin-algolia`,
+    options: {
+      applicationId: process.env.ALGOLIA_APP_ID,
+      adminApiKey: process.env.ALGOLIA_ADMIN_API_KEY,
+      settings: {
+        // index settings...
+        products: {
+          indexSettings: {
+            searchableAttributes: ["title", "description"],
+            attributesToRetrieve: [
+              "id",
+              "title",
+              "description",
+              "handle",
+              "thumbnail",
+              "variants",
+              "variant_sku",
+              "options",
+              "collection_title",
+              "collection_handle",
+              "images",
+            ],
+          },
+        },
+      },
+    },
+  },
 ];
 
 const modules = {
